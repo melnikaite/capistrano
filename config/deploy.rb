@@ -1,13 +1,18 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+set :application, "capistrano"
+set :repository,  "git@github.com:melnikaite/capistrano.git"
 
-set :scm, :subversion
+set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+role :web, "172.16.16.177"                          # Your HTTP server, Apache/etc
+role :app, "172.16.16.177"                          # This may be the same as your `Web` server
+role :db,  "172.16.16.177", :primary => true # This is where Rails migrations will run
+#role :db,  "your slave db-server here"
+
+set :deploy_to, "/usr/share/nginx/www"
+set :user, "capistrano"
+set :scm_username, "melnikaite"
+default_run_options[:pty] = true
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
