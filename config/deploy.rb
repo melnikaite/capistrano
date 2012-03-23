@@ -13,6 +13,9 @@ set :branch, fetch(:branch, "master")
 set :env, fetch(:env, "current")
 set :keep_releases, 3
 after "deploy", "deploy:cleanup"
+after "deploy:update_code" do
+  run ["ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"].join(" && ")
+end
 
 task :current do
   server "172.16.16.177", :app, :web, :db, :primary => true
