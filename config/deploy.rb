@@ -6,10 +6,13 @@ set :scm, :git
 
 set :deploy_to, "/usr/share/nginx/www"
 set :user, "capistrano"
+set :password, "capistrano"
 set :scm_username, "melnikaite"
 default_run_options[:pty] = true
 set :branch, fetch(:branch, "master")
 set :env, fetch(:env, "current")
+set :keep_releases, 3
+after "deploy", "deploy:cleanup"
 
 task :current do
   server "172.16.16.177", :app, :web, :db, :primary => true
