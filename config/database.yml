@@ -4,7 +4,8 @@ development:
   database: capistrano
   pool: 5
   username: root
-  password: 
+  password:
+  socket: /tmp/mysql.sock 
 
 current:
   adapter: mysql2
@@ -13,6 +14,7 @@ current:
   pool: 5
   username: root
   password: capistrano
+  socket: /tmp/mysql.sock
 
 production:
   adapter: mysql2
@@ -21,4 +23,5 @@ production:
   pool: 5
   username: root
   password: capistrano
+  socket: /tmp/mysql.sock
 
