@@ -1,0 +1,24 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: capistrano
+  pool: 5
+  username: root
+  password:
+
+current:
+  adapter: mysql2
+  encoding: utf8
+  database: capistrano
+  pool: 5
+  username: root
+  password: capistrano
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: capistrano
+  pool: 5
+  username: root
+  password: capistrano
+
