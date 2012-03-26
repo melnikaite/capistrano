@@ -15,7 +15,7 @@ set :bundle_without, [:development, :test]
 
 set :user, "capistrano"
 set :password, "capistrano"
-set :deploy_to, "/usr/share/nginx/www"
+set :deploy_to, "/opt/nginx/html"
 set :use_sudo, false
 
 # Must be set for the password prompt from git to work
@@ -63,6 +63,13 @@ namespace :deploy do
   end
 end
 
+namespace :rvm do
+  desc "Create correct RVM file"
+  task :create_rvmrc do
+    run "cd #{current_path} && source ~/.rvm/scripts/rvm && rvm use 1.9.3-p125@rails320 --rvmrc --create && rvm rvmrc trust #{current_path}"
+  end
+end
+
 after 'deploy:update_code', 'deploy:symlink_shared'
-after "deploy", "deploy:migrate", "deploy:cleanup"
+after "deploy", "deploy:migrate", "rvm:create_rvmrc", "deploy:start", "deploy:cleanup"
 
